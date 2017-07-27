@@ -14,14 +14,14 @@ than used directly.
 
 ## Release Information
 
-Latest release: 0.1.3
+Latest release: TBD 
 
 * [All released versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22clojure-install%22)
 
 [Leiningen](http://github.com/technomancy/leiningen/) dependency information:
 
 ```
-[org.clojure/clojure-install "0.1.3"]
+[org.clojure/clojure-install "TBD"]
 ```
 
 [Maven](http://maven.apache.org) dependency information:
@@ -30,7 +30,7 @@ Latest release: 0.1.3
 <dependency>
   <groupId>org.clojure</groupId>
   <artifactId>clojure-install</artifactId>
-  <version>0.1.3</version>
+  <version>TBD</version>
 </dependency>
 ```
 
