@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.clojure</groupId>
   <artifactId>clojure-install</artifactId>
-  <version>0.1.10-SNAPSHOT</version>
+  <version>0.1.10</version>
   <packaging>jar</packaging>
   <name>clojure-install</name>
   <description>Clojure dependency installer</description>
@@ -13,7 +13,7 @@
     <connection>scm:git:git@github.com:clojure/clojure-install.git</connection>
     <developerConnection>scm:git:git@github.com:clojure/clojure-install.git</developerConnection>
     <url>git@github.com:clojure/clojure-install.git</url>
-    <tag>HEAD</tag>
+    <tag>clojure-install-0.1.10</tag>
   </scm>
 
   <licenses>
