@@ -1,4 +1,5 @@
-# clojure-install
+clojure-install
+=====================================
 
 The Clojure install project is used to bootstrap a system to include Clojure,
 tools.deps.alpha, and the scripts necessary to use them to obtain more 
@@ -10,6 +11,29 @@ download the initial dependency set.
 
 In general, this project will be obtained and used within system installers rather
 than used directly.
+
+## Release Information
+
+Latest release: 0.1.3
+
+* [All released versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22clojure-install%22)
+
+[Leiningen](http://github.com/technomancy/leiningen/) dependency information:
+
+```
+[org.clojure/clojure-install "0.1.3"]
+```
+
+[Maven](http://maven.apache.org) dependency information:
+
+```
+<dependency>
+  <groupId>org.clojure</groupId>
+  <artifactId>clojure-install</artifactId>
+  <version>0.1.3</version>
+</dependency>
+```
+
 
 ## Usage
 
@@ -36,9 +60,13 @@ org.clojure/tools.deps.alpha=0.1.14
 org.clojure/spec.alpha=0.1.123
 ```
 
-## Releases and Dependency Information
+## Developer Information
 
-Not yet released.
+* [GitHub project](https://github.com/clojure/clojure-install)
+* [How to contribute](https://dev.clojure.org/display/community/Contributing)
+* [Bug Tracker](https://dev.clojure.org/jira/browse/INST)
+* [Continuous Integration](https://build.clojure.org/job/clojure-install/)
+* [Compatibility Test Matrix](https://build.clojure.org/job/clojure-install-test-matrix/)
 
 ## License
 
