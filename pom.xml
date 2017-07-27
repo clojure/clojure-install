@@ -4,8 +4,10 @@
   <groupId>org.clojure</groupId>
   <artifactId>clojure-install</artifactId>
   <version>0.1.8-SNAPSHOT</version>
+  <packaging>jar</packaging>
   <name>clojure-install</name>
   <description>Clojure dependency installer</description>
+  <url>https://github.com/clojure/clojure-install</url>
 
   <scm>
     <connection>scm:git:git@github.com:clojure/clojure-install.git</connection>
