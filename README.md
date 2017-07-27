@@ -5,8 +5,8 @@ tools.deps.alpha, and the scripts necessary to use them to obtain more
 dependencies and run a Clojure repl or programs.
 
 The installer assumes only that Java is available. The install tool is written
-in Java and bundled (in an uberjar) with the necessary Maven Aether libraries to 
-traverse and download the initial dependency set.
+in Java and uses with the necessary Maven Aether libraries to traverse and
+download the initial dependency set.
 
 In general, this project will be obtained and used within system installers rather
 than used directly.
