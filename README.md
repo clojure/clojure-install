@@ -6,7 +6,7 @@ tools.deps.alpha, and the scripts necessary to use them to obtain more
 dependencies and run a Clojure repl or programs.
 
 The installer assumes only that Java is available. The install tool is written
-in Java and uses with the necessary Maven Aether libraries to traverse and
+in Java and uses the necessary Maven Aether libraries to traverse and
 download the initial dependency set.
 
 In general, this project will be obtained and used within system installers rather
@@ -14,14 +14,14 @@ than used directly.
 
 ## Release Information
 
-Latest release: TBD 
+Latest release: 0.1.10 
 
 * [All released versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22clojure-install%22)
 
 [Leiningen](http://github.com/technomancy/leiningen/) dependency information:
 
 ```
-[org.clojure/clojure-install "TBD"]
+[org.clojure/clojure-install "0.1.10"]
 ```
 
 [Maven](http://maven.apache.org) dependency information:
@@ -30,7 +30,7 @@ Latest release: TBD
 <dependency>
   <groupId>org.clojure</groupId>
   <artifactId>clojure-install</artifactId>
-  <version>TBD</version>
+  <version>0.1.10</version>
 </dependency>
 ```
 
