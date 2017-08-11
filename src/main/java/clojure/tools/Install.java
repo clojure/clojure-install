@@ -33,10 +33,10 @@ public class Install {
 
     private static String HOME = System.getProperty("user.home");
 
-    private static File backup(File f) throws IOException {
+    private static File backup(File f, boolean verbose) throws IOException {
         if(f.exists()) {
             File backup = new File(f.getParentFile(), f.getName() + ".backup");
-            System.out.println("Backing up " + f.getAbsolutePath() + " to .backup file");
+            if(verbose) System.out.println("Backing up " + f.getAbsolutePath() + " to .backup file");
             Files.copy(f.toPath(), backup.toPath(), StandardCopyOption.REPLACE_EXISTING);
         }
         return f;
@@ -89,7 +89,7 @@ public class Install {
         return req;
     }
 
-    public static List<ArtifactResult> resolveDeps(RepositorySystem system, RepositorySystemSession session, RemoteRepository repo, List<Dependency> deps)
+    private static List<ArtifactResult> resolveDeps(RepositorySystem system, RepositorySystemSession session, RemoteRepository repo, List<Dependency> deps)
     throws DependencyResolutionException {
         List<RemoteRepository> repos = new ArrayList<RemoteRepository>();
         repos.add(repo);
@@ -102,7 +102,7 @@ public class Install {
         return results;
     }
 
-    public static void install() throws Exception {
+    private static void install(boolean verbose) throws Exception {
         // Ensure ~/.clojure/ exists
         File clojure = new File(HOME, ".clojure");
         if(! clojure.exists()) {
@@ -125,7 +125,7 @@ public class Install {
         RemoteRepository repo = new RemoteRepository.Builder("central", "default", "https://repo1.maven.org/maven2").build();
 
         // Load and install deps
-        System.out.println("Installing deps");
+        if(verbose) System.out.println("Installing deps");
         List<Dependency> deps = new ArrayList<Dependency>();
         for (Map.Entry<?, ?> entry: props.entrySet()) {
             String lib = (String) entry.getKey();
@@ -143,11 +143,11 @@ public class Install {
 
 
         // Find files and make backups
-        File cp = backup(new File(clojure, "clj.cp"));
-        File systemdeps = backup(new File(clojure, "deps.edn"));
+        File cp = backup(new File(clojure, "clj.cp"), verbose);
+        File systemdeps = backup(new File(clojure, "deps.edn"), verbose);
 
         // Write clj.cp
-        System.out.println("Writing: " + cp.getAbsolutePath());
+        if(verbose) System.out.println("Writing: " + cp.getAbsolutePath());
         BufferedWriter cpWriter = new BufferedWriter(new FileWriter(cp));
         Iterator<ArtifactResult> resultsIter = results.iterator();
         cpWriter.write(resultsIter.next().getArtifact().getFile().getAbsolutePath());
@@ -158,7 +158,7 @@ public class Install {
         cpWriter.close();
 
         // Write system deps.edn
-        System.out.println("Writing: " + systemdeps.getAbsolutePath());
+        if(verbose) System.out.println("Writing: " + systemdeps.getAbsolutePath());
         BufferedWriter systemdepsWriter = new BufferedWriter(new FileWriter(systemdeps));
         systemdepsWriter.write(String.format(
                 "{:deps {%1$s/%2$s {:type :mvn :version \"%3$s\"}}\n" +
@@ -167,12 +167,37 @@ public class Install {
                 "org.clojure", "clojure", props.get("org.clojure/clojure")));
         systemdepsWriter.close();
 
-        System.out.println("Done.");
+        // Extract clj script and install it
+
+        if(verbose) System.out.println("Done.");
     }
 
+    private static boolean parseArgs(String[] args) {
+        boolean verbose = false;
+        if(args.length > 0) {
+            if(args[0].equals("-v")) {
+                verbose = true;
+            }
+        }
+        return verbose;
+    }
+
+    /**
+     * Usage: java clojure.tools.Install [opts]
+     *
+     * opts:
+     *
+     *   -v - verbose mode
+     *
+     * Expects to be called in the context of install-clj script, which ensures:
+     *
+     *   ~/.clojure exists
+     *   ~/.clojure/clj.props exists
+     */
     public static void main(String[] args) {
+        boolean verbose = parseArgs(args);
         try {
-            install();
+            install(verbose);
         } catch(Throwable e) {
             System.err.println(e.getMessage());
             e.printStackTrace();
