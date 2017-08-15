@@ -14,14 +14,14 @@ than used directly.
 
 ## Release Information
 
-Latest release: 0.1.10 
+Latest release: 0.1.21
 
 * [All released versions](http://search.maven.org/#search%7Cgav%7C1%7Cg%3A%22org.clojure%22%20AND%20a%3A%22clojure-install%22)
 
 [Leiningen](http://github.com/technomancy/leiningen/) dependency information:
 
 ```
-[org.clojure/clojure-install "0.1.10"]
+[org.clojure/clojure-install "0.1.21"]
 ```
 
 [Maven](http://maven.apache.org) dependency information:
@@ -30,7 +30,7 @@ Latest release: 0.1.10
 <dependency>
   <groupId>org.clojure</groupId>
   <artifactId>clojure-install</artifactId>
-  <version>0.1.10</version>
+  <version>0.1.21</version>
 </dependency>
 ```
 
@@ -41,12 +41,13 @@ Latest release: 0.1.10
 
 The `Install` program performs the following steps:
 
-* Read `~/.clojure/clj.props`
+* Given a Clojure config directory
+* Read `CONFIG/clj.props`
 * Use those props to form a dependency set
 * Download those dependencies and all transitive dependencies to the local Maven repository
-* If `~/.clojure/clj.cp` or `~/.clojure/deps.edn` exist, copy them to backup files
-* Create `~/.clojure/clj.cp` - used when invoking tools.deps.alpha
-* Create `~/.clojure/deps.edn` - user-level deps map, for declaring default deps and artifact providers
+* If `CONFIG/clj.cp` or `CONFIG/deps.edn` exist, copy them to backup files
+* Create `CONFIG/clj.cp` - used when invoking tools.deps.alpha
+* Create `CONFIG/deps.edn` - user-level deps map, for declaring default deps and artifact providers
 
 This can be re-run to pick up manual changes in `clj.props`.
 
