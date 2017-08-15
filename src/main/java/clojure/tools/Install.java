@@ -102,9 +102,9 @@ public class Install {
         return results;
     }
 
-    private static void install(boolean verbose) throws Exception {
-        // Ensure ~/.clojure/ exists
-        File clojure = new File(HOME, ".clojure");
+    private static void install(String configDir, boolean verbose) throws Exception {
+        // Ensure config directory exists
+        File clojure = new File(configDir);
         if(! clojure.exists()) {
             throw new IOException("Directory does not exist: " + clojure.getAbsolutePath());
         }
@@ -141,7 +141,6 @@ public class Install {
         }
         List<ArtifactResult> results = resolveDeps(system, session, repo, deps);
 
-
         // Find files and make backups
         File cp = backup(new File(clojure, "clj.cp"), verbose);
         File systemdeps = backup(new File(clojure, "deps.edn"), verbose);
@@ -167,23 +166,13 @@ public class Install {
                 "org.clojure", "clojure", props.get("org.clojure/clojure")));
         systemdepsWriter.close();
 
-        // Extract clj script and install it
-
         if(verbose) System.out.println("Done.");
     }
 
-    private static boolean parseArgs(String[] args) {
-        boolean verbose = false;
-        if(args.length > 0) {
-            if(args[0].equals("-v")) {
-                verbose = true;
-            }
-        }
-        return verbose;
-    }
-
     /**
-     * Usage: java clojure.tools.Install [opts]
+     * Usage: java clojure.tools.Install config_dir [opts]
+     *
+     * config_dir - the Clojure config directory to use
      *
      * opts:
      *
@@ -195,12 +184,15 @@ public class Install {
      *   ~/.clojure/clj.props exists
      */
     public static void main(String[] args) {
-        boolean verbose = parseArgs(args);
         try {
-            install(verbose);
+            if(args.length == 0) {
+                throw new IOException("No config directory specified");
+            }
+            String configDir = args[0];
+            boolean verbose = args.length > 1 && args[1].equals("-v");
+            install(configDir, verbose);
         } catch(Throwable e) {
             System.err.println(e.getMessage());
-            e.printStackTrace();
             System.exit(1);
         }
     }
