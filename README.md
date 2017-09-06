@@ -1,6 +1,10 @@
 clojure-install
 =====================================
 
+# DEPRECATED - this project is no longer active. See https://github.com/clojure/brew-install.
+
+----
+
 The Clojure install project is used to bootstrap a system to include Clojure,
 tools.deps.alpha, and the scripts necessary to use them to obtain more 
 dependencies and run a Clojure repl or programs.
